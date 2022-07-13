@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  nso:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2022-07-12T17:11:43.209741-07:00"
+    description: A Helm chart for Cisco Network Services Orchestrator (NSO)
+    digest: e12ef1477f69914620f87454e334cd6b001ba3e62629871f53c7e6590c4003d4
+    name: nso
+    type: application
+    urls:
+    - https://model-driven-devops.github.io/nso-helm/nso-1.0.0.tgz
+    version: 1.0.0
+generated: "2022-07-12T17:11:43.208841-07:00"
