@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "nso.fullname" . }}
+  labels:
+    {{- include "nso.labels" . | nindent 4 }}
+  {{- with .Values.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.sshPort }}
+      targetPort: 22
+      protocol: TCP
+      name: ssh
+    - port: {{ .Values.service.httpPort }}
+      targetPort: 80
+      protocol: TCP
+      name: http
+    - port: {{ .Values.service.httpsPort }}
+      targetPort: 443
+      protocol: TCP
+      name: https
+    - port: {{ .Values.service.netconfPort }}
+      targetPort: 830
+      protocol: TCP
+      name: netconf
+    - port: {{ .Values.service.haPort }}
+      targetPort: 4570
+      protocol: TCP
+      name: ha
+
+  selector:
+    {{- include "nso.selectorLabels" . | nindent 4 }}
