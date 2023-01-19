@@ -64,8 +64,19 @@ spec:
             httpGet:
               path: /
               port: http
+          volumeMounts:
+            {{- range $key, $val := .Values.storage.volumes }}
+            - name: {{ $key }}
+              mountPath: {{ $val.path }}
+            {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        {{- range $key, $val := .Values.storage.volumes }}
+        - name: {{ $key }}
+          persistentVolumeClaim:
+            claimName: {{ $.Release.Name }}-pvc-{{ $key }}
+        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

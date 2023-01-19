@@ -89,6 +89,17 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
+storage:
+  dynamicProvisioning:
+    enabled: true
+    storageClassName: gp3
+  volumes:
+    cdb:
+      path: /nso/run/cdb
+      size: 1Gi
+      chmod: 750
+      matchLabels: {}
+
 nodeSelector: {}
 
 tolerations: []

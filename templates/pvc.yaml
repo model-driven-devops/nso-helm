@@ -1,0 +1,28 @@
+{{- if .Values.storage }}
+{{- range $key, $val := .Values.storage.volumes }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ $.Release.Name }}-pvc-{{ $key }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ $val.size }}
+  {{- if $.Values.storage.dynamicProvisioning.enabled }}
+  # Dynamic provisioning
+  storageClassName: {{ default nil $.Values.storage.dynamicProvisioning.storageClassName | quote }}
+  {{- else }}
+  # No dynamic provisioning, look for an existing volume
+  storageClassName: ""
+  {{- with $val.matchLabels }}
+  # Restrict any matching volume by specifying required label(s)
+  selector:
+    matchLabels:
+      {{- toYaml . | nindent 6 }}
+  {{- end }}
+  {{- end }}
+{{- end }}
+{{- end }}
