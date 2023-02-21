@@ -37,7 +37,10 @@ spec:
           - name: ADMIN_USERNAME
             value: "{{ .Values.adminUsername }}"
           - name: ADMIN_PASSWORD
-            value: "{{ .Values.adminPassword }}"
+            valueFrom:
+              secretKeyRef:
+                name: nso-auth
+                key: adminPassword  
           - name: HTTP_ENABLE
             value: "{{ .Values.httpEnable }}"
           - name: HTTPS_ENABLE

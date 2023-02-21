@@ -4,13 +4,16 @@
 
 # NSO-specific variables
 adminUsername: admin
-adminPassword: admin
 httpEnable: "true"
 httpsEnable: "false"
 sshPort: "22"
 cliStyle: c
 haEnable: "false"
 pamEnable: "false"
+
+# template will auto generate an admin password
+# to manually set password, uncomment adminPassword below
+# adminPassword: admin
 
 replicaCount: 1
 
