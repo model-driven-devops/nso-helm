@@ -15,6 +15,13 @@ pamEnable: "false"
 # to manually set password, uncomment adminPassword below
 # adminPassword: admin
 
+# Istio Injection settings
+# If deploying into a cluster where istio injection is confgured
+# (for example: Big Bang) set enabled: true and provide fqdn
+istio:
+  enabled: true
+fqdn: "nso.domain.dev"
+
 replicaCount: 1
 
 image:
